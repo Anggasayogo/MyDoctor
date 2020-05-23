@@ -1,3 +1,4 @@
 import Splash from './splash';
+import Getstarted from './getstarted';
 
-export {Splash};
+export {Splash,Getstarted};

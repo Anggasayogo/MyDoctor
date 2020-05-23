@@ -1,9 +1,9 @@
 import React from 'react';
-import { Splash } from './pages';
+import { Getstarted, Splash } from './pages';
 
 const App = () => {
   return (
-    <Splash/>
+    <Getstarted/>
   )
 }
 
