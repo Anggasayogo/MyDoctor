@@ -1,19 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View, ImageBackground } from 'react-native'
 import { ILLogo, ILGetStarted } from '../../assets';
-import { Buttons } from '../../components';
+import { Buttons, Gap } from '../../components';
 
-const Getstarted = () => {
+const Getstarted = ({navigation}) => {
     return (
         <ImageBackground source={ILGetStarted} style={styles.page}>
             <View>
                 <ILLogo/>
-                <Text style={styles.title}>Konsultasi dengandokter jadi lebih mudah & fleksibel</Text>
+                <Text style={styles.title}>Konsultasi dengan dokter jadi lebih mudah & fleksibel</Text>
             </View>
             <View>
-                <Buttons title="Get Started"/>
-                <View style={{ height: 16}}/>
-                <Buttons title="Sign In" type="secondary"/>
+                <Buttons title="Get Started" onPress={()=>{ navigation.navigate('Register') }}/>
+                <Gap height={16} />
+                <Buttons title="Sign In" type="secondary" onPress={()=>{ navigation.navigate('Login') }}/>
             </View>
         </ImageBackground>
     )
@@ -24,6 +24,9 @@ export default Getstarted;
 const styles = StyleSheet.create({
     page: {padding: 40,justifyContent: 'space-between',backgroundColor: 'white',flex: 1},
     title : {
-        fontSize: 28,fontWeight: '600',color: 'white',marginTop: 91
+        fontSize: 28,
+        color: 'white',
+        marginTop: 91,
+        fontFamily: 'Nunito-SemiBold'
     }
 })
