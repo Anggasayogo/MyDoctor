@@ -1,3 +1,5 @@
 import IconBackDark from './back.svg';
+import IconAddPhoto from './btnAddPhoto.svg';
+import IconRmvPhoto from './btnRmvPhoto.svg';
 
-export {IconBackDark};
+export {IconBackDark,IconAddPhoto,IconRmvPhoto};
