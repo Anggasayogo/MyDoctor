@@ -1,5 +1,21 @@
 import IconBackDark from './back.svg';
 import IconAddPhoto from './btnAddPhoto.svg';
 import IconRmvPhoto from './btnRmvPhoto.svg';
+import IconDoctor from './ic-doctor.svg';
+import IconMessage from './ic-message.svg';
+import IconHospitals from './ic-hospitals.svg';
+import IconDoctorActive from './ic-doctor-active.svg';
+import IconMessageActive from './ic-message-active.svg';
+import IconHospitalsActive from './ic-hospitals-active.svg';
 
-export {IconBackDark,IconAddPhoto,IconRmvPhoto};
+export {
+    IconBackDark,
+    IconAddPhoto,
+    IconRmvPhoto,
+    IconDoctor,
+    IconMessage,
+    IconHospitals,
+    IconDoctorActive,
+    IconMessageActive,
+    IconHospitalsActive
+};

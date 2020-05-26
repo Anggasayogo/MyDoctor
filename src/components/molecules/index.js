@@ -1,3 +1,4 @@
 import Header from './header';
+import BotoomNavigator from './botoomNavigator';
 
-export {Header};
+export {Header,BotoomNavigator};
