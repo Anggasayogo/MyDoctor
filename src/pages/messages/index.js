@@ -5,7 +5,7 @@ import { colors, fornts } from '../../utils'
 import { DumyDoctor1, DumyDoctor2, DumyDoctor3 } from '../../assets'
 
 const Messages = () => {
-    const [doctors,setDoctors] = useState([
+    const [doctors] = useState([
         {
             id: 1,
             profile : DumyDoctor1,
@@ -32,7 +32,12 @@ const Messages = () => {
                 {
                     doctors.map( (doctor) => {
                         return (
-                            <ListDoctor profile={doctor.profile} name={doctor.name} desc={doctor.desc}/>
+                            <ListDoctor 
+                            key={doctor.id}
+                            profile={doctor.profile} 
+                            name={doctor.name} 
+                            desc={doctor.desc}
+                            />
                         )
                     })
                 }
