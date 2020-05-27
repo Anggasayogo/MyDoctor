@@ -4,6 +4,7 @@ import HomeProfile from './homeprofile';
 import DoctorCategory from './doctorcategory';
 import RatedDoctor from './ratedDoctor';
 import NewsItems from './newsItem';
+import ListDoctor from './listDoctor';
 
 export {Header,
     BotoomNavigator,
@@ -11,4 +12,5 @@ export {Header,
     RatedDoctor,
     DoctorCategory,
     NewsItems,
+    ListDoctor,
 };
