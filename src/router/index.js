@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
-import { Splash, Getstarted, Register, Login, UploadPhoto, Doctor, Messages, Hospitals } from '../pages';
+import { Splash, Getstarted, Register, Login, UploadPhoto, Doctor, Messages, Hospitals, ChooseDoctor } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BotoomNavigator } from '../components';
 
@@ -19,13 +19,14 @@ const MainApp = () => {
 
 const Router = () => {
     return (
-        <Stack.Navigator initialRouteName="MainApp">
+        <Stack.Navigator>
             <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false}}/>
             <Stack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false}}/>
             <Stack.Screen name="Register" component={Register} options={{ headerShown: false}}/>
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false}}/>
             <Stack.Screen name="UploadPhoto" component={UploadPhoto} options={{ headerShown: false}}/>
             <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false}}/>
+            <Stack.Screen name="ChooseDoctor" component={ChooseDoctor} options={{ headerShown: false}}/>
         </Stack.Navigator>
     )
 }

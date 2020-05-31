@@ -4,7 +4,7 @@ import { HomeProfile, DoctorCategory, RatedDoctor, NewsItems, Gap } from '../../
 import { fornts, colors } from '../../utils'
 import {JSONCategoryDoctor} from '../../assets';
 
-const Doctor = () => {
+const Doctor = ({navigation}) => {
     return (
         <View style={styles.page}>
             <View style={styles.content}>
@@ -21,7 +21,7 @@ const Doctor = () => {
                             {
                                 JSONCategoryDoctor.data.map((item) => {
                                     return(
-                                        <DoctorCategory category={item.category}/>
+                                        <DoctorCategory category={item.category} key={item.id} onPress={()=>navigation.navigate('ChooseDoctor')}/>
                                     );
                                 })
                             }
