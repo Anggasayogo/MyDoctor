@@ -2,15 +2,24 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { DumyProfile } from '../../../assets/dummy';
 import { colors, fornts } from '../../../utils';
+import { IconRmvPhoto } from '../../../assets';
 
-const Profile = () => {
+const Profile = ({name,desc}) => {
     return (
         <View style={styles.container}>
             <View style={styles.borderProfile}>
                 <Image source={DumyProfile} style={styles.avatar}/>
+                <IconRmvPhoto style={styles.removePhoto}/>
             </View>
-            <Text style={styles.name}>Shayna Melinda</Text>
-            <Text style={styles.profession}>Product Designer</Text>
+            {/* jika ada name */}
+            {
+                name && (
+                    <View>
+                        <Text style={styles.name}>{name}</Text>
+                        <Text style={styles.profession}>{desc}</Text>
+                    </View>
+                )
+            }
         </View>
     )
 }
@@ -41,5 +50,10 @@ const styles = StyleSheet.create({
         fontFamily: fornts.primary[600],
         color: colors.text.secondary,
         marginTop: 2,
+    },
+    removePhoto: {
+        position: 'absolute',
+        right: 8,
+        bottom: 8,
     },
 })
