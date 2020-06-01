@@ -6,6 +6,8 @@ import RatedDoctor from './ratedDoctor';
 import NewsItems from './newsItem';
 import ListDoctor from './listDoctor';
 import ListHospital from './listHospital';
+import ChatItem from './chatitem';
+import InputChat from './inputchat';
 
 export {Header,
     BotoomNavigator,
@@ -15,4 +17,6 @@ export {Header,
     NewsItems,
     ListDoctor,
     ListHospital,
+    ChatItem,
+    InputChat,
 };

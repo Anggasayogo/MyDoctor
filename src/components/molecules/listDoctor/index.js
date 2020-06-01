@@ -1,11 +1,11 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { DumyDoctor2, IconNext } from '../../../assets';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { IconNext } from '../../../assets';
 import { colors, fornts } from '../../../utils';
 
-const ListDoctor = ({profile,name,desc,type}) => {
+const ListDoctor = ({profile,name,desc,type,onPress}) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <Image source={profile} style={styles.avatar}/>
             <View style={styles.content}>
                 <Text style={styles.name}>{name}</Text>
@@ -14,7 +14,7 @@ const ListDoctor = ({profile,name,desc,type}) => {
             {
                 type == 'next' && <IconNext/>
             }
-        </View>
+        </TouchableOpacity>
     )
 }
 
