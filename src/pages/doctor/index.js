@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { HomeProfile, DoctorCategory, RatedDoctor, NewsItems, Gap } from '../../components'
 import { fornts, colors } from '../../utils'
-import {JSONCategoryDoctor} from '../../assets';
+import {JSONCategoryDoctor, DumyDoctor3, DumyDoctor1, DumyDoctor2} from '../../assets';
 
 const Doctor = ({navigation}) => {
     return (
@@ -31,9 +31,9 @@ const Doctor = ({navigation}) => {
                     </View>
                     <View style={styles.wrapperSection}>
                         <Text style={styles.sectionLabel}>Top Rated Doctor</Text>
-                            <RatedDoctor/>
-                            <RatedDoctor/>
-                            <RatedDoctor/>
+                            <RatedDoctor name="Alexa Rachel" desc="Pedia Trician" avatar={DumyDoctor3} onPress={()=> navigation.navigate('DoctorProfile')}/>
+                            <RatedDoctor name="Suny Frank" desc="dantricst" avatar={DumyDoctor1}/>
+                            <RatedDoctor name="Poee Min" desc="Pedia Trician" avatar={DumyDoctor2}/>
                         <Text style={styles.sectionLabel}>Good News</Text>
                     </View>
                     <NewsItems/>

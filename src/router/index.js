@@ -12,7 +12,8 @@ import {
     ChooseDoctor, 
     Chatting, 
     UserProfile,
-    UpdateProfile, 
+    UpdateProfile,
+    DoctorProfile, 
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BotoomNavigator } from '../components';
@@ -43,6 +44,7 @@ const Router = () => {
             <Stack.Screen name="Chatting" component={Chatting} options={{ headerShown: false}}/>
             <Stack.Screen name="UserProfile" component={UserProfile} options={{ headerShown: false}}/>
             <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={{ headerShown: false}}/>
+            <Stack.Screen name="DoctorProfile" component={DoctorProfile} options={{ headerShown: false}}/>
         </Stack.Navigator>
     )
 }
