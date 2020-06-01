@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { ListDoctor } from '../../components'
+import { List } from '../../components'
 import { colors, fornts } from '../../utils'
 import { DumyDoctor1, DumyDoctor2, DumyDoctor3 } from '../../assets'
 
@@ -32,7 +32,7 @@ const Messages = () => {
                 {
                     doctors.map( (doctor) => {
                         return (
-                            <ListDoctor 
+                            <List 
                             key={doctor.id}
                             profile={doctor.profile} 
                             name={doctor.name} 

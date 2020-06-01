@@ -12,8 +12,16 @@ import IconNext from './right.svg';
 import IconBackLight from './back-light.svg';
 import IconSendDark from './send-disable.svg';
 import IconSendLight from './send-enable.svg';
+import IconEditProfile from './edit-profile.svg';
+import IconHelp from './help.svg';
+import IconRated from './rateing.svg';
+import IconLanguage from './lang.svg';
 
 export {
+    IconEditProfile,
+    IconHelp,
+    IconRated,
+    IconLanguage,
     IconBackDark,
     IconAddPhoto,
     IconRmvPhoto,

@@ -1,12 +1,29 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { IconNext } from '../../../assets';
+import { IconNext, IconEditProfile, IconLanguage, IconRated, IconHelp } from '../../../assets';
 import { colors, fornts } from '../../../utils';
 
-const ListDoctor = ({profile,name,desc,type,onPress}) => {
+const List = ({profile,name,desc,type,onPress,icon}) => {
+    const Icon = () => {
+        if(icon === 'edit-profile'){
+            return <IconEditProfile/>
+        }
+        if(icon === 'language'){
+            return <IconLanguage/>
+        }
+        if(icon === 'rate'){
+            return <IconRated/>
+        }
+        if(icon === 'help'){
+            return <IconHelp/>
+        }
+
+        return <IconEditProfile/>
+    }
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
-            <Image source={profile} style={styles.avatar}/>
+            {/* jika ada icon maka dia render icon jika tidak ada maka render image */}
+            {icon ? <Icon/> : <Image source={profile} style={styles.avatar}/> }
             <View style={styles.content}>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.desc}>{desc}</Text>
@@ -18,12 +35,12 @@ const ListDoctor = ({profile,name,desc,type,onPress}) => {
     )
 }
 
-export default ListDoctor;
+export default List;
 
 const styles = StyleSheet.create({
     container: {flexDirection: 'row',padding: 16, borderBottomWidth: 1, borderBottomColor: colors.border,alignItems: 'center',justifyContent: 'space-between'},
-    avatar: {width: 46, height: 46, borderRadius: 46 /2, marginRight: 12},
+    avatar: {width: 46, height: 46, borderRadius: 46 /2},
     name: { fontSize: 16, fontFamily: fornts.primary.normal, color: colors.text.primary},
     desc: { fontSize: 12, fontFamily: fornts.primary[300], color: colors.text.secondary },
-    content : {flex: 1},
+    content : {flex: 1, marginLeft: 16},
 })

@@ -4,18 +4,21 @@ import HomeProfile from './homeprofile';
 import DoctorCategory from './doctorcategory';
 import RatedDoctor from './ratedDoctor';
 import NewsItems from './newsItem';
-import ListDoctor from './listDoctor';
+import List from './list';
 import ListHospital from './listHospital';
 import ChatItem from './chatitem';
 import InputChat from './inputchat';
+import Profile from './profile';
 
-export {Header,
+export {
+    Profile,
+    Header,
     BotoomNavigator,
     HomeProfile,
     RatedDoctor,
     DoctorCategory,
     NewsItems,
-    ListDoctor,
+    List,
     ListHospital,
     ChatItem,
     InputChat,
