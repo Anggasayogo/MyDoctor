@@ -17,8 +17,8 @@ const Buttons = ({type,title,onPress,icon,disable}) => {
     }
     if(disable){
         return (
-            <View style={styles.container(type)} onPress={onPress}>
-                <Text style={styles.text(type)}>{title}</Text>
+            <View style={styles.disableBg} >
+                <Text style={styles.textDisable}>{title}</Text>
             </View>
         )
     }
@@ -44,5 +44,16 @@ const styles = StyleSheet.create({
             color: type === 'secondary' ? colors.button.secondary.text : colors.button.primary.text,
             fontFamily: fornts.primary[600]
         }
-    )
+    ),
+    disableBg : {
+        paddingVertical: 10,
+        borderRadius: 10,
+        backgroundColor: colors.button.disable.background,
+    },
+    textDisable : {
+        fontSize: 18,
+        textAlign: 'center',
+        fontFamily: fornts.primary[600],
+        color: colors.button.disable.text,
+    }
 })
