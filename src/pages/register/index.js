@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Buttons, Gap, Header, Input, Loading } from '../../components';
 import { colors, useForm } from '../../utils';
 import { Fire } from '../../config';
+import { showMessage} from "react-native-flash-message";
 
 const Register = ({navigation}) => {
 
@@ -22,12 +23,25 @@ const Register = ({navigation}) => {
         .then((success) => {
             setLoading(false);
             setForm('reset');
+
+            // proccess inserting ke firebase
+            // https://firebase/users/iuewwew0e9we8we8w/
+            const data = {
+                fullName : form.fullName,
+                profession : form.profession,
+                email : form.email,
+            }
+            Fire.database().ref('users/' +success.user.uid+ '/').set(data);
             console.log('register success ',success);
         })
         .catch((error) => {
             const errorMessage = error.message;
             console.log('error register',errorMessage);
             setLoading(false);
+            showMessage({
+                message: errorMessage,
+                type: "danger",
+            });
         });
     }
     return (
