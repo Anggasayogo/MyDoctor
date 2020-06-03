@@ -4,10 +4,10 @@ import { colors, fornts } from '../../../utils';
 import { Buttons } from '../../atoms';
 import { DumyDoctor3 } from '../../../assets';
 
-const DarkProfiel = () => {
+const DarkProfiel = ({onPress}) => {
     return (
         <View style={styles.container}>
-            <Buttons type="icon-only" icon="back-light"/>
+            <Buttons type="icon-only" icon="back-light" onPress={onPress}/>
             <View style={styles.content}>
                 <Text style={styles.name}>Nairoby Putri Hayza</Text>
                 <Text style={styles.title}>Dokter anak</Text>

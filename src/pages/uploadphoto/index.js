@@ -18,9 +18,9 @@ const UploadPhoto = ({navigation}) => {
                     <Text style={styles.profesional}>Product Designer</Text>
                 </View>
                 <View>
-                    <Buttons title="Upload And Continue"/>
+                    <Buttons title="Upload And Continue" onPress={()=> navigation.replace('MainApp')} />
                     <Gap height={30}/>
-                    <Link title="Skip for this" align="center" size={16} />
+                    <Link title="Skip for this" align="center" size={16} onPress={()=> navigation.replace('MainApp')} />
                 </View>
             </View>
         </View>

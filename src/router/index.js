@@ -33,7 +33,7 @@ const MainApp = () => {
 
 const Router = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false}}/>
             <Stack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false}}/>
             <Stack.Screen name="Register" component={Register} options={{ headerShown: false}}/>

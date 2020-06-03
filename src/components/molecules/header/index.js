@@ -7,7 +7,7 @@ import DarkProfiel from './DarkProfiel'
 const Header = ({onPress,title,type}) => {
     if(type === 'dark-profile'){
         return (
-            <DarkProfiel/>
+            <DarkProfiel onPress={onPress}/>
         )
     }
     return (

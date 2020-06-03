@@ -4,12 +4,13 @@ import { DumyProfile } from '../../../assets/dummy';
 import { colors, fornts } from '../../../utils';
 import { IconRmvPhoto } from '../../../assets';
 
-const Profile = ({name,desc}) => {
+const Profile = ({name,desc,isRemove}) => {
     return (
         <View style={styles.container}>
             <View style={styles.borderProfile}>
                 <Image source={DumyProfile} style={styles.avatar}/>
-                <IconRmvPhoto style={styles.removePhoto}/>
+                {/* jikada isremove */}
+                {isRemove && <IconRmvPhoto style={styles.removePhoto}/>}
             </View>
             {/* jika ada name */}
             {
