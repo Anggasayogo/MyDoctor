@@ -20,8 +20,9 @@ const Register = ({navigation}) => {
         Fire.auth()
         .createUserWithEmailAndPassword(form.email, form.password)
         .then((success) => {
-            console.log('register success ',success);
             setLoading(false);
+            setForm('reset');
+            console.log('register success ',success);
         })
         .catch((error) => {
             const errorMessage = error.message;
