@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Buttons, Gap, Header, Input } from '../../components';
-import { colors } from '../../utils';
+import { colors, useForm } from '../../utils';
 
 const Register = ({navigation}) => {
     const [fullName,setFullName] = useState('')
@@ -9,21 +9,28 @@ const Register = ({navigation}) => {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
 
+    const [form,setForm] = useForm({
+        fullName : '',
+        profession : '',
+        email : '',
+        password : '',
+    })
+
     const onContinue = () => {
-        console.log(fullName,profession,email,password);
+        console.log(form);
     }
     return (
         <View style={styles.page}>
             <Header onPress={() => navigation.goBack() } title="Daftar Akun"/>
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.content}>
-                <Input label="Full Name" onChangeText={setFullName} value={fullName}/>
+                <Input label="Full Name" onChangeText={value => setForm('fullName',value)} value={form.fullName}/>
                 <Gap height={24}/>
-                <Input label="Pekerjaan" onChangeText={setProfession} value={profession}/>
+                <Input label="Pekerjaan" onChangeText={value => setForm('profession',value)} value={form.profession}/>
                 <Gap height={24}/>
-                <Input label="Email" onChangeText={setEmail} value={email}/>
+                <Input label="Email" onChangeText={value => setForm('email',value)} value={form.email}/>
                 <Gap height={24}/>
-                <Input label="Password" onChangeText={setPassword} value={password} secureTextEntry/>
+                <Input label="Password" onChangeText={value => setForm('password',value)} value={form.password} secureTextEntry/>
                 <Gap height={40}/>
                 <Buttons title="continue" onPress={ () => onContinue()}/>
             </View>
