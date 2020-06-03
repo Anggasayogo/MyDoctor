@@ -5,6 +5,7 @@ import { ILNullPhoto, IconAddPhoto, IconRmvPhoto } from '../../assets'
 import { colors, fornts } from '../../utils'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import ImagePicker from 'react-native-image-picker';
+import { showMessage} from "react-native-flash-message";
 
 const UploadPhoto = ({navigation}) => {
     const [hasPhoto,setHasPhoto] = useState(false)
@@ -20,19 +21,17 @@ const UploadPhoto = ({navigation}) => {
 
         ImagePicker.showImagePicker(options, (response) => {
              console.log('Respons = ',response);
-             const source = { uri: response.uri}
-             setPhoto(source)
-             setHasPhoto(true)
-
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            } else {
-                const source = { uri: response.uri };
+            if (response.didCancel || response.error) {
+                showMessage({
+                    message: 'upps ! nampaknyah anda tidak memilih photo',
+                    type: "danger",
+                });
+            }else{
+                const source = { uri: response.uri}
+                setPhoto(source)
+                setHasPhoto(true)
             }
+
         });
     }
     return (
