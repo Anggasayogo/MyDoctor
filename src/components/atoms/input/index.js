@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { colors, fornts } from '../../../utils'
 
 const Input = ({label}) => {
+    // border nilai awal dan setBorder ketika diubah
+    const [border,setBorder] = useState(colors.border)
+    const onFocusForm = () => {
+        setBorder(colors.tertiery)
+    }
+    const onBlurForm = () => {
+        setBorder(colors.border)
+    }
     return (
         <View>
             <Text style={styles.label}>{label}</Text>
-            <TextInput style={styles.input}/>
+            <TextInput style={styles.input(border)} onBlur={onBlurForm} onFocus={onFocusForm}/>
         </View>
     )
 }
@@ -15,12 +23,14 @@ const Input = ({label}) => {
 export default Input;
 
 const styles = StyleSheet.create({
-    input: {
-        borderWidth: 1,
-        borderColor: colors.border,
-        borderRadius: 10,
-        padding: 12
-    },
+    input: (border) => (
+        {
+            borderWidth: 1,
+            borderColor: border,
+            borderRadius: 10,
+            padding: 12
+        }
+    ),
     label: {
         fontSize: 16,
         color: colors.text.secondary,
