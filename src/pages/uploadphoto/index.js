@@ -6,10 +6,12 @@ import { colors, fornts } from '../../utils'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import ImagePicker from 'react-native-image-picker';
 import { showMessage} from "react-native-flash-message";
+import { Fire } from '../../config'
 
 const UploadPhoto = ({navigation,route}) => {
-    const {fullName,profession} = route.params;
+    const {fullName,profession,uid} = route.params;
     const [hasPhoto,setHasPhoto] = useState(false)
+    const [photoForDb,setPhotoForDb] = useState('');
     const [photo,setPhoto] = useState(ILNullPhoto)
     const getImmage = () => {
         const options = {
@@ -21,7 +23,7 @@ const UploadPhoto = ({navigation,route}) => {
         }
 
         ImagePicker.showImagePicker(options, (response) => {
-             console.log('Respons = ',response);
+             
             if (response.didCancel || response.error) {
                 showMessage({
                     message: 'upps ! nampaknyah anda tidak memilih photo',
@@ -29,12 +31,20 @@ const UploadPhoto = ({navigation,route}) => {
                 });
             }else{
                 const source = { uri: response.uri}
+                setPhotoForDb(`data:${response.type};base64, ${response.data}`);
                 setPhoto(source)
                 setHasPhoto(true)
             }
 
         });
+
     }
+
+    const UploadAndNext = () => {
+        Fire.database().ref('users/' + uid + '/').update({photo : photoForDb});
+        navigation.replace('MainApp')
+    }
+
     return (
         <View style={styles.page}>
             <Header title="Upload Photo" onPress={() => navigation.goBack()}/>
@@ -52,7 +62,7 @@ const UploadPhoto = ({navigation,route}) => {
                     <Buttons 
                      disable={!hasPhoto}
                      title="Upload And Continue"
-                     onPress={()=> navigation.replace('MainApp')} 
+                     onPress={UploadAndNext} 
                      />
                     <Gap height={30}/>
                     <Link title="Skip for this" align="center" size={16} onPress={()=> navigation.replace('MainApp')} />
