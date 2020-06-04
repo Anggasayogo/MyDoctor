@@ -7,7 +7,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import ImagePicker from 'react-native-image-picker';
 import { showMessage} from "react-native-flash-message";
 
-const UploadPhoto = ({navigation}) => {
+const UploadPhoto = ({navigation,route}) => {
+    const {fullName,profession} = route.params;
     const [hasPhoto,setHasPhoto] = useState(false)
     const [photo,setPhoto] = useState(ILNullPhoto)
     const getImmage = () => {
@@ -44,8 +45,8 @@ const UploadPhoto = ({navigation}) => {
                         {hasPhoto && <IconRmvPhoto style={styles.IcaddPhoto}/>}
                         {!hasPhoto && <IconAddPhoto style={styles.IcaddPhoto}/>}
                     </TouchableOpacity>
-                    <Text style={styles.name}>Shayna Melinda</Text>
-                    <Text style={styles.profesional}>Product Designer</Text>
+                    <Text style={styles.name}>{fullName}</Text>
+                    <Text style={styles.profesional}>{profession}</Text>
                 </View>
                 <View>
                     <Buttons 

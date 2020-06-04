@@ -16,16 +16,13 @@ const Register = ({navigation}) => {
 
     const [loading,setLoading] = useState(false)
 
-    const onContinue = () => {
+    const onContinue = () => {     
         setLoading(true);
         Fire.auth()
         .createUserWithEmailAndPassword(form.email, form.password)
         .then((success) => {
             setLoading(false);
             setForm('reset');
-
-            // proccess inserting ke firebase
-            // https://firebase/users/iuewwew0e9we8we8w/
             const data = {
                 fullName : form.fullName,
                 profession : form.profession,
@@ -33,7 +30,7 @@ const Register = ({navigation}) => {
             }
             Fire.database().ref('users/' +success.user.uid+ '/').set(data);
             storeData('user',data)
-            navigation.navigate('UploadPhoto')
+            navigation.navigate('UploadPhoto',data)
             console.log('register success ',success);
         })
         .catch((error) => {
