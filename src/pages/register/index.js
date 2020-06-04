@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Buttons, Gap, Header, Input, Loading } from '../../components';
-import { colors, useForm } from '../../utils';
+import { colors, useForm, storeData, getData } from '../../utils';
 import { Fire } from '../../config';
 import { showMessage} from "react-native-flash-message";
 
@@ -32,6 +32,8 @@ const Register = ({navigation}) => {
                 email : form.email,
             }
             Fire.database().ref('users/' +success.user.uid+ '/').set(data);
+            storeData('user',data)
+            navigation.navigate('UploadPhoto')
             console.log('register success ',success);
         })
         .catch((error) => {
