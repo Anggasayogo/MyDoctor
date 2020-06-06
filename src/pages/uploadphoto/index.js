@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { Header, Buttons, Link, Gap } from '../../components'
 import { ILNullPhoto, IconAddPhoto, IconRmvPhoto } from '../../assets'
-import { colors, fornts } from '../../utils'
+import { colors, fornts, storeData } from '../../utils'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import ImagePicker from 'react-native-image-picker';
 import { showMessage} from "react-native-flash-message";
@@ -16,6 +16,9 @@ const UploadPhoto = ({navigation,route}) => {
     const getImmage = () => {
         const options = {
             title: 'Select Photo Profile',
+            quality: 0.5,
+            maxWidth: 200,
+            maxHeight: 200,
             storageOptions: {
                 skipBackup: true,
                 path: 'images',
@@ -32,6 +35,7 @@ const UploadPhoto = ({navigation,route}) => {
             }else{
                 const source = { uri: response.uri}
                 setPhotoForDb(`data:${response.type};base64, ${response.data}`);
+                console.log('Hasil get Image',response)
                 setPhoto(source)
                 setHasPhoto(true)
             }
@@ -42,6 +46,9 @@ const UploadPhoto = ({navigation,route}) => {
 
     const UploadAndNext = () => {
         Fire.database().ref('users/' + uid + '/').update({photo : photoForDb});
+        const data = route.params
+        data.photo = photoForDb
+        storeData('user',data);
         navigation.replace('MainApp')
     }
 
