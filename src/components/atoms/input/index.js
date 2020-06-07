@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { colors, fornts } from '../../../utils'
 
-const Input = ({label,value,onChangeText,secureTextEntry}) => {
+const Input = ({label,value,onChangeText,secureTextEntry,disable}) => {
     // border nilai awal dan setBorder ketika diubah
     const [border,setBorder] = useState(colors.border)
     const onFocusForm = () => {
@@ -22,6 +22,8 @@ const Input = ({label,value,onChangeText,secureTextEntry}) => {
             value={value}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
+            editable={!disable}
+            selectTextOnFocus={!disable}
             />
         </View>
     )
