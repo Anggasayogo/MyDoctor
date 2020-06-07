@@ -29,20 +29,56 @@ const UpdateProfile = ({navigation}) => {
 
     const Update = () => {
         //console.log('Upadet profiln',profile);
+        console.log('New password', password);
+        if(password.length > 0){
+            if(password.length < 6){
+                showMessage({
+                    message: 'upps ! password kurang dari 6 character',
+                    type: "danger",
+                });
+            }else{
+                //update password
+                updatePassword();
+                updateProfile();
+                navigation.replace('MainApp')
+            }
+        }else{
+            updateProfile();
+            navigation.replace('MainApp')
+        }
+    }
+
+    const updatePassword = () => {
+        //update password
+        Fire.auth().onAuthStateChanged(user => {
+            if(user){
+                //update password
+                user.updatePassword(password).catch(err=>{
+                    showMessage({
+                        message: err.message,
+                        type: "danger",
+                    });
+                })
+            }
+        })
+    }
+
+    const updateProfile = () => {
         const data = profile
         data.photo = photoForDb;
+
         Fire.database().ref(`users/${profile.uid}/`)
-        .update(data)
-        .then(res=>{
-            console.log("succes Upadte",data)
-            storeData('user',data)
-        })
-        .catch(err =>{
-            showMessage({
-                message: err.message,
-                type: "danger",
-            });
-        })
+            .update(data)
+            .then(res=>{
+                console.log("succes Upadte",data)
+                storeData('user',data)
+            })
+            .catch(err =>{
+                showMessage({
+                    message: err.message,
+                    type: "danger",
+                });
+            })
     }
 
     const changeText = (key,value) => {
@@ -94,7 +130,7 @@ const UpdateProfile = ({navigation}) => {
                 <Gap height={24}/>
                 <Input label="Email" disable value={profile.email} onChangeText={(value) => changeText('email',value)}/>
                 <Gap height={24}/>
-                <Input label="Password"/>
+                <Input secureTextEntry label="Password" value={password} onChangeText={(value) => setPassword(value)}/>
                 <Gap height={40}/>
                 <Buttons title="Save Profile" onPress={Update}/>
             </View>

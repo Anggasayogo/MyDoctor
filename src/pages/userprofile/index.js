@@ -3,6 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { Gap, Header, List, Profile } from '../.../../../components';
 import { colors, getData } from '../../utils';
 import { ILNullPhoto } from '../../assets';
+import { Fire } from '../../config';
+import { showMessage} from "react-native-flash-message";
 
 const UserProfile = ({navigation}) => {
     const [profil,setProfil] = useState({
@@ -17,6 +19,19 @@ const UserProfile = ({navigation}) => {
             setProfil(data)
         })
     },[])
+
+    const signOut = () => {
+        Fire.auth().signOut().then(res => {
+            console.log('success sign put !')
+            navigation.replace('GetStarted');
+        })
+        .catch(err => {
+            showMessage({
+                message: err.message,
+                type: "danger",
+            });
+        })
+    }
     return (
         <View style={styles.page}>
             <Header title="Profile" onPress={()=>navigation.goBack()} />
@@ -26,7 +41,7 @@ const UserProfile = ({navigation}) => {
             <List name="Edit Profile" desc="Last Update Yesterday" type="next" icon="edit-profile" onPress={()=> navigation.navigate('UpdateProfile')} />
             <List name="Languaugee" desc="Last Update Yesterday" type="next" icon="language" />
             <List name="Give Us Rate" desc="Last Update Yesterday" type="next" icon="rate" />
-            <List name="Help Center" desc="Last Update Yesterday" type="next" icon="help" />
+            <List name="Sign Out" desc="Last Update Yesterday" type="next" icon="help" onPress={signOut} />
         </View>
     )
 }
