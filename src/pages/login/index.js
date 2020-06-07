@@ -1,26 +1,28 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { showMessage } from "react-native-flash-message"
+import { ScrollView } from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
 import { ILLogo } from '../../assets'
-import { Input, Link, Buttons, Gap, Loading } from '../../components'
-import { colors, fornts, useForm, storeData } from '../../utils'
-import { ScrollView } from 'react-native-gesture-handler';
-import {Fire} from '../../config';
-import { showMessage} from "react-native-flash-message";
+import { Buttons, Gap, Input, Link } from '../../components'
+import { Fire } from '../../config'
+import { colors, fornts, storeData, useForm } from '../../utils'
 
 const Login = ({navigation}) => {
     const [form,setForm] = useForm({
         email : '',
         password : '',
     });
-    const [loading,setLoading] = useState(false)
+
+    const dispatch = useDispatch();
 
     const Login = () => {
         console.log('Data dari form',form);
-        setLoading(true)
+        dispatch({type : 'SET_LOADING',value : true})
        Fire.auth().signInWithEmailAndPassword(form.email, form.password)
        .then(res=>{
            console.log('successnyah',res)
-           setLoading(false)
+           dispatch({type : 'SET_LOADING',value : false})
            Fire.database().ref(`users/${res.user.uid}/`).once('value')
            .then(resDb => {
                console.log('Respons dari firebase',resDb)
@@ -36,7 +38,7 @@ const Login = ({navigation}) => {
             message: err.message,
             type: "danger",
            });
-           setLoading(false)
+           dispatch({type : 'SET_LOADING',value : false})
        })
     }
 
@@ -54,10 +56,13 @@ const Login = ({navigation}) => {
             <Gap height={40}/>
             <Buttons title="Sign In" onPress={Login} />
             <Gap height={30}/>
-            <Link title="Create New Account" size={16} align="center" onPress={()=> navigation.navigate('Register')}/>
+            <Link 
+            title="Create New Account" 
+            size={16} align="center" 
+            onPress={()=> navigation.navigate('Register')}
+            />
             </ScrollView>
         </View>
-        {loading && <Loading/>}
         </>
     )
 }
