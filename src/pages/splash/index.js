@@ -5,9 +5,10 @@ import { colors, fornts } from '../../utils'
 import { Fire } from '../../config'
 
 const Splash = ({navigation}) => {
+    
     useEffect(()=>{
-        setTimeout(()=>{
-            Fire.auth().onAuthStateChanged((user) => {
+        const unsubcribe = Fire.auth().onAuthStateChanged((user) => {
+            setTimeout(()=>{
                 if(user){
                     // user sudah login
                     console.log(user)
@@ -16,9 +17,11 @@ const Splash = ({navigation}) => {
                     // user logout
                     navigation.replace('Getstarted');
                 }
-            })
-        },3000)
+            },3000)
+        })
+        return () => unsubcribe();
     },[])
+
     return (
         <View style={styles.page}>
             <ILLogo/>

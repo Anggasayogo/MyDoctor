@@ -16,7 +16,7 @@ const Register = ({navigation}) => {
 
     const [loading,setLoading] = useState(false)
 
-    const onContinue = () => {     
+    const onContinue = () => {  
         setLoading(true);
         Fire.auth()
         .createUserWithEmailAndPassword(form.email, form.password)
@@ -31,7 +31,7 @@ const Register = ({navigation}) => {
             }
             Fire.database().ref('users/' +success.user.uid+ '/').set(data);
             storeData('user',data)
-            navigation.navigate('UploadPhoto',data)
+            navigation.replace('UploadPhoto',data)
             console.log('register success ',success);
         })
         .catch((error) => {
@@ -39,10 +39,20 @@ const Register = ({navigation}) => {
             console.log('error register',errorMessage);
             setLoading(false);
             showMessage({
-                message: errorMessage,
+                message: error.message,
                 type: "danger",
             });
         });
+    }
+
+    const test = () =>{
+        const data = {
+            fullName : 'Nazwasihab',
+            profession : 'narasi',
+            email : 'narasi@mail.com',
+        }
+        storeData('user',data)
+        navigation.navigate('UploadPhoto',data)
     }
     return (
         <>
@@ -58,7 +68,7 @@ const Register = ({navigation}) => {
                         <Gap height={24}/>
                         <Input label="Password" onChangeText={value => setForm('password',value)} value={form.password} secureTextEntry/>
                         <Gap height={40}/>
-                        <Buttons title="continue" onPress={ () => onContinue()}/>
+                        <Buttons title="continue" onPress={onContinue}/>
                     </View>
                 </ScrollView>
             </View>

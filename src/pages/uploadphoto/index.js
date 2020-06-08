@@ -10,6 +10,10 @@ import { Fire } from '../../config'
 
 const UploadPhoto = ({navigation,route}) => {
     const {fullName,profession,uid} = route.params;
+    console.log('Fulname',fullName)
+    console.log('Prfesion',profession)
+    console.log('Uid',uid)
+
     const [hasPhoto,setHasPhoto] = useState(false)
     const [photoForDb,setPhotoForDb] = useState('');
     const [photo,setPhoto] = useState(ILNullPhoto)

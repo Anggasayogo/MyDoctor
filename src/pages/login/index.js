@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { ILLogo } from '../../assets'
 import { Buttons, Gap, Input, Link } from '../../components'
 import { Fire } from '../../config'
-import { colors, fornts, storeData, useForm } from '../../utils'
+import { colors, fornts, storeData, useForm, showError } from '../../utils'
 
 const Login = ({navigation}) => {
     const [form,setForm] = useForm({
@@ -34,16 +34,12 @@ const Login = ({navigation}) => {
        })
        .catch(err=>{
            console.log('Erronyah adalah',err)
-           showMessage({
-            message: err.message,
-            type: "danger",
-           });
+           showError(err.message);
            dispatch({type : 'SET_LOADING',value : false})
        })
     }
 
     return (
-        <>
         <View style={styles.page}>
             <ScrollView showsVerticalScrollIndicator={false}>
             <ILLogo/>
@@ -63,7 +59,6 @@ const Login = ({navigation}) => {
             />
             </ScrollView>
         </View>
-        </>
     )
 }
 
