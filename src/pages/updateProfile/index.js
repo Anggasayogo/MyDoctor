@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Buttons, Header, Input, Profile, Gap } from '../../components';
-import { colors,getData, storeData} from '../../utils';
-import {Fire} from '../../config';
-import { showMessage} from "react-native-flash-message";
+import { ScrollView, StyleSheet, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import {ILNullPhoto} from '../../assets';
+import { ILNullPhoto } from '../../assets';
+import { Buttons, Gap, Header, Input, Profile } from '../../components';
+import { Fire } from '../../config';
+import { colors, getData, showError, storeData } from '../../utils';
 
 const UpdateProfile = ({navigation}) => {
 
@@ -28,14 +27,9 @@ const UpdateProfile = ({navigation}) => {
     },[])
 
     const Update = () => {
-        //console.log('Upadet profiln',profile);
-        console.log('New password', password);
         if(password.length > 0){
             if(password.length < 6){
-                showMessage({
-                    message: 'upps ! password kurang dari 6 character',
-                    type: "danger",
-                });
+                showError('upps ! password kurang dari 6 character');
             }else{
                 //update password
                 updatePassword();
@@ -54,10 +48,7 @@ const UpdateProfile = ({navigation}) => {
             if(user){
                 //update password
                 user.updatePassword(password).catch(err=>{
-                    showMessage({
-                        message: err.message,
-                        type: "danger",
-                    });
+                    showError(err.message)
                 })
             }
         })
@@ -70,14 +61,10 @@ const UpdateProfile = ({navigation}) => {
         Fire.database().ref(`users/${profile.uid}/`)
             .update(data)
             .then(res=>{
-                console.log("succes Upadte",data)
                 storeData('user',data)
             })
             .catch(err =>{
-                showMessage({
-                    message: err.message,
-                    type: "danger",
-                });
+                showError(err.message)
             })
     }
 
@@ -103,15 +90,10 @@ const UpdateProfile = ({navigation}) => {
         ImagePicker.showImagePicker(options, (response) => {
              
             if (response.didCancel || response.error) {
-                showMessage({
-                    message: 'upps ! nampaknyah anda tidak memilih photo',
-                    type: "danger",
-                });
+                showError('upps ! nampaknyah anda tidak memilih photo');
             }else{
-                console.log(response);
                 const source = { uri: response.uri}
                 setPhotoForDb(`data:${response.type};base64, ${response.data}`);
-                console.log('Hasil get Image',response)
                 setPhoto(source)
             }
 

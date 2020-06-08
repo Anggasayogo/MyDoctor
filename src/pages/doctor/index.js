@@ -1,13 +1,37 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import { HomeProfile, DoctorCategory, RatedDoctor, NewsItems, Gap } from '../../components'
-import { fornts, colors, getData } from '../../utils'
-import {JSONCategoryDoctor, DumyDoctor3, DumyDoctor1, DumyDoctor2} from '../../assets';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { DumyDoctor1, DumyDoctor2, DumyDoctor3, JSONCategoryDoctor } from '../../assets';
+import { DoctorCategory, Gap, HomeProfile, NewsItems, RatedDoctor } from '../../components';
+import { Fire } from '../../config';
+import { colors, fornts } from '../../utils';
 
 const Doctor = ({navigation}) => {
+    const [news,setNews] = useState([]);
+    const [catDoctor,setCatDoctor] = useState([]);
+
     useEffect(()=>{
-        getData('user').then((res) => {
-            console.log('Data User adalah ',res);
+        Fire.database()
+        .ref(`news/`)
+        .once('value')
+        .then(res=>{
+            if(res.val()){
+                setNews(res.val());
+            }
+        })
+        .catch(err=>{
+            console.log('erronyah :',err);
+        })
+
+        Fire.database()
+        .ref('category doctor/')
+        .once('value')
+        .then(res=>{
+            if(res.val()){
+                setCatDoctor(res.val());
+            }
+        })
+        .catch(err=>{
+            console.log('erronyah :',err);
         })
     },[])
     return (
@@ -24,7 +48,7 @@ const Doctor = ({navigation}) => {
                         <View style={styles.category}>
                             <Gap width={32} />
                             {
-                                JSONCategoryDoctor.data.map((item) => {
+                                catDoctor.map((item) => {
                                     return(
                                         <DoctorCategory category={item.category} key={item.id} onPress={()=>navigation.navigate('ChooseDoctor')}/>
                                     );
@@ -41,9 +65,16 @@ const Doctor = ({navigation}) => {
                             <RatedDoctor name="Poee Min" desc="Pedia Trician" avatar={DumyDoctor2}/>
                         <Text style={styles.sectionLabel}>Good News</Text>
                     </View>
-                    <NewsItems/>
-                    <NewsItems/>
-                    <NewsItems/>
+                    {news.map(item => {
+                        return(
+                            <NewsItems 
+                            key={item.id}
+                            title={item.title} 
+                            date={item.date} 
+                            image={{ uri : item.image}}
+                            />
+                        )
+                    })}
                     <Gap height={30}/>    
                 </ScrollView>
             </View>

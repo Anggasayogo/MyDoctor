@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { Header, Buttons, Link, Gap } from '../../components'
-import { ILNullPhoto, IconAddPhoto, IconRmvPhoto } from '../../assets'
-import { colors, fornts, storeData } from '../../utils'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import ImagePicker from 'react-native-image-picker';
-import { showMessage} from "react-native-flash-message";
+import ImagePicker from 'react-native-image-picker'
+import { IconAddPhoto, IconRmvPhoto, ILNullPhoto } from '../../assets'
+import { Buttons, Gap, Header, Link } from '../../components'
 import { Fire } from '../../config'
+import { colors, fornts, showError, storeData } from '../../utils'
 
 const UploadPhoto = ({navigation,route}) => {
     const {fullName,profession,uid} = route.params;
-    console.log('Fulname',fullName)
-    console.log('Prfesion',profession)
-    console.log('Uid',uid)
 
     const [hasPhoto,setHasPhoto] = useState(false)
     const [photoForDb,setPhotoForDb] = useState('');
@@ -32,14 +28,10 @@ const UploadPhoto = ({navigation,route}) => {
         ImagePicker.showImagePicker(options, (response) => {
              
             if (response.didCancel || response.error) {
-                showMessage({
-                    message: 'upps ! nampaknyah anda tidak memilih photo',
-                    type: "danger",
-                });
+                showError("Upss Nampaknyah anda tidak memilih photo !")
             }else{
                 const source = { uri: response.uri}
                 setPhotoForDb(`data:${response.type};base64, ${response.data}`);
-                console.log('Hasil get Image',response)
                 setPhoto(source)
                 setHasPhoto(true)
             }

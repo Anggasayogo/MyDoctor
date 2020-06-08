@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Buttons, Gap, Header, Input, Loading } from '../../components';
-import { colors, useForm, storeData, getData } from '../../utils';
 import { Fire } from '../../config';
-import { showMessage} from "react-native-flash-message";
+import { colors, showError, storeData, useForm } from '../../utils';
 
 const Register = ({navigation}) => {
 
@@ -32,16 +31,11 @@ const Register = ({navigation}) => {
             Fire.database().ref('users/' +success.user.uid+ '/').set(data);
             storeData('user',data)
             navigation.replace('UploadPhoto',data)
-            console.log('register success ',success);
         })
         .catch((error) => {
             const errorMessage = error.message;
-            console.log('error register',errorMessage);
             setLoading(false);
-            showMessage({
-                message: error.message,
-                type: "danger",
-            });
+            showError(error.message);
         });
     }
 

@@ -11,7 +11,6 @@ const Splash = ({navigation}) => {
             setTimeout(()=>{
                 if(user){
                     // user sudah login
-                    console.log(user)
                     navigation.replace('MainApp');
                 }else{
                     // user logout

@@ -1,12 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { showMessage } from "react-native-flash-message"
 import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import { ILLogo } from '../../assets'
 import { Buttons, Gap, Input, Link } from '../../components'
 import { Fire } from '../../config'
-import { colors, fornts, storeData, useForm, showError } from '../../utils'
+import { colors, fornts, showError, storeData, useForm } from '../../utils'
 
 const Login = ({navigation}) => {
     const [form,setForm] = useForm({
@@ -17,15 +16,14 @@ const Login = ({navigation}) => {
     const dispatch = useDispatch();
 
     const Login = () => {
-        console.log('Data dari form',form);
         dispatch({type : 'SET_LOADING',value : true})
+
        Fire.auth().signInWithEmailAndPassword(form.email, form.password)
        .then(res=>{
-           console.log('successnyah',res)
            dispatch({type : 'SET_LOADING',value : false})
            Fire.database().ref(`users/${res.user.uid}/`).once('value')
            .then(resDb => {
-               console.log('Respons dari firebase',resDb)
+    
                if(resDb.val()){
                    storeData('user',resDb.val());
                    navigation.replace('MainApp');
@@ -33,7 +31,6 @@ const Login = ({navigation}) => {
            })
        })
        .catch(err=>{
-           console.log('Erronyah adalah',err)
            showError(err.message);
            dispatch({type : 'SET_LOADING',value : false})
        })

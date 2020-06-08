@@ -8,7 +8,6 @@ import Router from './router';
 
 const MainApp = () => {
   const stateGlobal = useSelector(state => state)
-  console.log('satet global : ',stateGlobal);
   return (
       <>
         <NavigationContainer>
